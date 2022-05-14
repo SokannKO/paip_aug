@@ -1,0 +1,46 @@
+#Tumor box, line/nerve contour data
+DATASET:
+  root_dataset: "../DATABANK/PAIP2021-dataset/imgnmask_l1/bbox"
+  list_train: "/home/sko/SKO/PRG/paip_aug/train/data/paip/_5f_CV_2/all_tr_CV1.txt"
+  list_val: "/home/sko/SKO/PRG/paip_aug/train/data/paip/_5f_CV_2/all_vl_CV1.txt"
+  list_test: "/home/sko/SKO/PRG/paip_aug/train/data/paip/bbox_ts_svs_all.txt"
+  md_classes: ['NonTumor', 'TumorWOn', 'TumorWn']
+  imgSizes: (512, 512)
+  num_class: 3
+  imgMaxSize: 512
+  padding_constant: 8
+  segm_downsampling_rate: 8
+  random_flip: True
+
+MODEL:
+  type: "classification"
+  arch_encoder: "densenet161cls"
+  fc_dim: 2048
+
+TRAIN:
+  tr_batchsize: 16
+  tr_num_epochs: 30
+  start_epoch: 0
+  tr_epoch_num_iters: 1
+  ckpt_interval: -1
+  tr_optim: "ADAM"
+  tr_lr_encoder: 0.0001
+  tr_lr_decoder: 0.0001
+  tr_lr_pow: 0.5
+  tr_momentum: 0.9
+  tr_weight_decay: 1e-4
+  fix_bn: False
+  workers: 16
+  disp_iter: 20
+  seed: 304
+
+VAL:
+  vl_batchsize: 32
+  visualize: False
+  checkpoint: "epoch_40.pth"
+
+TEST:
+  checkpoint: "epoch_40.pth"
+  result: "./paip_val_densenet161"
+
+CKPT_DIR: "ckpt/tmp-densenet161PTtrfBL2_cls_lr0001_ep30"
