@@ -4,7 +4,7 @@
 - direct augmentation
   - aug_data
     - allocation.py : Create nerve/tumor allocation dictionary
-    - traslation.py : Translate a nerve to tumor areas
+    - translation.py : Translate a nerve to tumor areas
 
 - training
   - train
